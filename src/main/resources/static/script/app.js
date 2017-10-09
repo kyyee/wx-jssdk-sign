@@ -222,7 +222,6 @@ JWeiXin.prototype.wxConfig = function () {
             console.log('数据：' + data + '\n状态：' + textStatus + '\n响应头：' + jqXHR);
             let success = textStatus === 'success' && data.result >= 0;
             if (success) {
-                console.log('sign：' + JSON.stringify(data.data));
                 $.extend(that.configs, data.data);
                 console.log(that.configs);
                 _config(that.configs);
