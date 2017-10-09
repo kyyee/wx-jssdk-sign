@@ -1,7 +1,7 @@
 /**
  * Created by jm1138 on 2017/10/9.
  */
-"use strict";
+'use strict';
 
 /*
  * 注意：
@@ -15,12 +15,13 @@
  * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
  */
 (function () {
-    $.get("sign?url=http://localhost", function (data, textStatus, jqXHR) {
-        console.log("数据：" + JSON.stringify(data) + "\n状态：" + textStatus + "\n响应头：" + JSON.stringify(jqXHR));
+    let url = 'http://wx.kubaoqinzi.com';
+    $.get('sign?url=' + url, function (data, textStatus, jqXHR) {
+        console.log('数据：' + JSON.stringify(data) + '\n状态：' + textStatus + '\n响应头：' + JSON.stringify(jqXHR));
         let success = status === 'success' && data.result >= 0;
         if (success) {
             let sign = data.data;
-            console.log("sign：" + JSON.stringify(sign));
+            console.log('sign：' + JSON.stringify(sign));
 
             wx.config({
                 debug: true,                // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -45,7 +46,7 @@
                 // 分享到朋友圈
                 wx.onMenuShareTimeline({
                     title: '标题',              // 分享标题
-                    link: 'http://localhost',   // 分享链接，该链接域名或路径必须与当前页面对应的公众号js安全域名一致
+                    link: url,   // 分享链接，该链接域名或路径必须与当前页面对应的公众号js安全域名一致
                     imgUrl: '',                 // 分享图标
                     success: function () {     // 用户确认分享后执行的回调函数
                     },
@@ -57,7 +58,7 @@
                 wx.onMenuShareAppMessage({
                     title: '标题',               // 分享标题
                     desc: '测试分享给朋友',      // 分享描述
-                    link: 'http://localhost',    // 分享链接，该链接域名或路径必须与当前页面对应的公众号js安全域名一致
+                    link: url,    // 分享链接，该链接域名或路径必须与当前页面对应的公众号js安全域名一致
                     imgUrl: '',                  // 分享图标
                     type: '',                    // 分享类型，music、video、link，不填默认为link
                     dataUrl: '',                 // 如果type为music或video，则要提供数据链接，默认为空
@@ -71,7 +72,7 @@
                 wx.onMenuShareQQ({
                     title: '标题',               // 分享标题
                     desc: '测试分享给朋友',      // 分享描述
-                    link: 'http://localhost',    // 分享链接，该链接域名或路径必须与当前页面对应的公众号js安全域名一致
+                    link: url,    // 分享链接，该链接域名或路径必须与当前页面对应的公众号js安全域名一致
                     imgUrl: '',                  // 分享图标
                     success: function () {      // 用户确认分享后执行的回调函数
                     },
@@ -83,7 +84,7 @@
                 wx.onMenuShareQZone({
                     title: '标题',               // 分享标题
                     desc: '测试分享给朋友',      // 分享描述
-                    link: 'http://localhost',    // 分享链接，该链接域名或路径必须与当前页面对应的公众号js安全域名一致
+                    link: url,    // 分享链接，该链接域名或路径必须与当前页面对应的公众号js安全域名一致
                     imgUrl: '',                  // 分享图标
                     success: function () {      // 用户确认分享后执行的回调函数
                     },
@@ -95,7 +96,7 @@
                 wx.getNetworkType({
                     success: function (res) {
                         let networkType = res.networkType; // 返回网络类型 2G、3G、4G、WIFI
-                        console.log("网络状态为：" + networkType);
+                        console.log('网络状态为：' + networkType);
                     }
                 });
 
@@ -107,7 +108,7 @@
                         let longitude = res.longitude; // 经度，浮点数，范围为180 — -180
                         let speed = res.speed;         // 速度，以 m/s 计
                         let accuracy = res.accuracy;   // 位置精度
-                        console.log("地理纬度：" + latitude + "经度：" + longitude + "速度：" + speed + "位置精度：" + accuracy);
+                        console.log('地理纬度：' + latitude + '经度：' + longitude + '速度：' + speed + '位置精度：' + accuracy);
                     }
                 });
             });
