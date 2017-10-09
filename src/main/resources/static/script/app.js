@@ -36,7 +36,7 @@ function wxShare() {
         if (!configs.signature) {
             $.get('sign?url=' + encodeURIComponent(url), function (data, textStatus, jqXHR) {
                 console.log('数据：' + JSON.stringify(data) + '\n状态：' + textStatus + '\n响应头：' + JSON.stringify(jqXHR));
-                let success = status === 'success' && data.result >= 0;
+                let success = textStatus === 'success' && data.result >= 0;
                 if (success) {
                     console.log('sign：' + JSON.stringify(data.data));
                     $.extend(configs, data.data);
@@ -198,7 +198,7 @@ $(function () {
 //     let imgUrl = '';
 //     $.get('sign?url=' + url, function (data, textStatus, jqXHR) {
 //         console.log('数据：' + JSON.stringify(data) + '\n状态：' + textStatus + '\n响应头：' + JSON.stringify(jqXHR));
-//         let success = status === 'success' && data.result >= 0;
+//         let success = textStatus === 'success' && data.result >= 0;
 //         if (success) {
 //             let sign = data.data;
 //             console.log('sign：' + JSON.stringify(sign));
