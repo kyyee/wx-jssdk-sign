@@ -1,0 +1,70 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        mavenLocal()
+//        本地maven仓库
+        maven {
+            url "file:///D:/.m2/repository"
+        }
+        maven {
+            url "http://uk.maven.org/maven2"
+        }
+        // maven库
+        def cn = "http://maven.aliyun.com/nexus/content/groups/public/"
+        def abroad = "http://central.maven.org/maven2/"
+        // 先从url中下载jar若没有找到，则在artifactUrls中寻找
+        maven {
+            url cn
+            artifactUrls abroad
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.kyyee'
+version = '0.0.1'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+//    本地maven仓库
+    maven {
+        url "file:///D:/.m2/repository"
+    }
+    maven {
+        url "http://uk.maven.org/maven2"
+    }
+    // maven库
+    def cn = "http://maven.aliyun.com/nexus/content/groups/public/"
+    def abroad = "http://central.maven.org/maven2/"
+    // 先从url中下载jar若没有找到，则在artifactUrls中寻找
+    maven {
+        url cn
+        artifactUrls abroad
+    }
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-aop')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    runtime('com.h2database:h2')
+    runtime('mysql:mysql-connector-java')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+}
