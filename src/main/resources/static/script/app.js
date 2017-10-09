@@ -15,7 +15,7 @@
  * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
  */
 (function () {
-    let url = 'http://wx.kubaoqinzi.com';
+    let url = window.location.href;
     $.get('sign?url=' + url, function (data, textStatus, jqXHR) {
         console.log('数据：' + JSON.stringify(data) + '\n状态：' + textStatus + '\n响应头：' + JSON.stringify(jqXHR));
         let success = status === 'success' && data.result >= 0;
