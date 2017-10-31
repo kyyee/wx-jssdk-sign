@@ -17,6 +17,8 @@ function JWeiXin() {
     };
 }
 
+JWeiXin.prototype.constructor = JWeiXin;
+
 JWeiXin.prototype.init = function (options) {
     if (options) {
         $.extend(this.configs, options);

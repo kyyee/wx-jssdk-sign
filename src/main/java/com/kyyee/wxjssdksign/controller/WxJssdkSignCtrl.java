@@ -7,6 +7,8 @@ package com.kyyee.wxjssdksign.controller;
 import com.kyyee.wxjssdksign.dto.StandardResponseDTO;
 import com.kyyee.wxjssdksign.exception.SignException;
 import com.kyyee.wxjssdksign.service.SignService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +31,10 @@ public class WxJssdkSignCtrl {
     SignService signService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public StandardResponseDTO sign(@RequestParam String url)
+    @ApiOperation(value = "签名接口", notes = "签名接口详细描述")
+    public StandardResponseDTO sign(
+            @ApiParam(required = true, name = "url", value = "需要签名的url")
+            @RequestParam String url)
             throws IOException, NoSuchAlgorithmException, SignException {
         LOGGER.info("url:{}", url);
         return new StandardResponseDTO<>(0, signService.sign(url));

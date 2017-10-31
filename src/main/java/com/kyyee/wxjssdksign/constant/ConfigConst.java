@@ -21,8 +21,6 @@ public class ConfigConst {
     public static final String CHARSET_UTF8 = "UTF-8";
     // http头配置
     public static final String CONTENT_TYPE = "Content-Type";
-    // 连接尝试遭到拒绝。
-    public static final int ERR_CONNECTION_REFUSED = -1100;
 
     // JsApiTicketDTO 缓存json文件
     public static final String JS_API_TICKET_CONFIG_JSON = "json/js-api-ticket.json";

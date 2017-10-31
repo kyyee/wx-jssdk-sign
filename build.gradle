@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.7.RELEASE'
+        springBootVersion = '1.5.8.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -27,7 +27,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 group = 'com.kyyee'
