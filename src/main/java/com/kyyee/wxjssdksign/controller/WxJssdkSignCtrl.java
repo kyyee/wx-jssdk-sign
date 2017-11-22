@@ -18,7 +18,10 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by jm1138 on 2017/9/6.
+ *
+ * @author jm1138
+ * @date 2017/9/6
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("/sign")
