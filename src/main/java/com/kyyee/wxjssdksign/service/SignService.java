@@ -4,8 +4,8 @@
 
 package com.kyyee.wxjssdksign.service;
 
-import com.kyyee.wxjssdksign.dto.SignDTO;
-import com.kyyee.wxjssdksign.exception.SignException;
+import com.kyyee.wxjssdksign.dto.response.SignResDto;
+import com.kyyee.wxjssdksign.exception.BaseException;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,5 +16,5 @@ import java.security.NoSuchAlgorithmException;
  */
 @Component
 public interface SignService {
-    SignDTO sign(String url) throws NoSuchAlgorithmException, IOException, SignException;
+    SignResDto sign(String url) throws NoSuchAlgorithmException, IOException, BaseException;
 }

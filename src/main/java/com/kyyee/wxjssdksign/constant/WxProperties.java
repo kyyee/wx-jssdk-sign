@@ -3,6 +3,7 @@
  */
 package com.kyyee.wxjssdksign.constant;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -11,26 +12,11 @@ import org.springframework.stereotype.Component;
  * 通过application.properties文件注入配置的配置类。
  */
 @Component
-@ConfigurationProperties(prefix = "wjsConfig")
-public class ConfigInjection {
+@ConfigurationProperties(prefix = "wx")
+@Data
+public class WxProperties {
     // 微信appId
     private String appId;
     // 微信appSecret
     private String appSecret;
-
-    public String getAppId() {
-        return appId;
-    }
-
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
-    public String getAppSecret() {
-        return appSecret;
-    }
-
-    public void setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
-    }
 }
