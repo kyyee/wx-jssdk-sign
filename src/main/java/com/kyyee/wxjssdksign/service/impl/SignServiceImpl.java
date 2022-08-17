@@ -43,16 +43,22 @@ public class SignServiceImpl implements SignService {
     public static final String ACCESS_TOKEN_CONFIG_JSON = "json/access_token.json";
     // Ticket 缓存json文件
     public static final String TICKET_CONFIG_JSON = "json/ticket.json";
-
+    ObjectMapper objectMapper = new ObjectMapper();
     @Resource
     private
     RestTemplate restTemplate;
-
     @Resource
     private
     WxProperties wxProperties;
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    private static String byteToHex(final byte[] hash) {
+        try (Formatter formatter = new Formatter()) {
+            for (byte b : hash) {
+                formatter.format("%02x", b);
+            }
+            return formatter.toString();
+        }
+    }
 
     @Override
     public SignResDto sign(String url) throws NoSuchAlgorithmException, IOException, BaseException {
@@ -72,22 +78,13 @@ public class SignServiceImpl implements SignService {
         signature = byteToHex(crypt.digest());
 
         return SignResDto.builder()
-                .appId(wxProperties.getAppId())
-                .nonceStr(nonceStr)
-                .timestamp(timestamp)
-                .url(url)
-                .rawSignature(rawSignature)
-                .signature(signature)
-                .build();
-    }
-
-    private static String byteToHex(final byte[] hash) {
-        try (Formatter formatter = new Formatter()) {
-            for (byte b : hash) {
-                formatter.format("%02x", b);
-            }
-            return formatter.toString();
-        }
+            .appId(wxProperties.getAppId())
+            .nonceStr(nonceStr)
+            .timestamp(timestamp)
+            .url(url)
+            .rawSignature(rawSignature)
+            .signature(signature)
+            .build();
     }
 
     private String createNonceStr() {
@@ -118,9 +115,9 @@ public class SignServiceImpl implements SignService {
             if (object.has("ticket")) {
                 String ticketStr = object.get("ticket").asText();
                 Ticket newTicket = Ticket.builder()
-                        .ticket(ticketStr)
-                        .expireTime(getExpireTime())
-                        .build();
+                    .ticket(ticketStr)
+                    .expireTime(getExpireTime())
+                    .build();
                 writeTicket(newTicket);
                 return newTicket.getTicket();
             } else {
@@ -159,8 +156,8 @@ public class SignServiceImpl implements SignService {
             if (object.has("access_token")) {
                 String accessTokenStr = object.get("access_token").asText();
                 AccessToken newAccessToken = AccessToken.builder()
-                        .accessToken(accessTokenStr)
-                        .expireTime(getExpireTime()).build();
+                    .accessToken(accessTokenStr)
+                    .expireTime(getExpireTime()).build();
                 writeAccessToken(newAccessToken);
                 return newAccessToken.getAccessToken();
             } else {

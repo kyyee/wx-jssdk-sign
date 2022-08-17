@@ -36,23 +36,23 @@ public class SwaggerConfig {
             .pathMapping("/")
             .select()
             .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-                .paths(PathSelectors.any())
-                .build();
+            .paths(PathSelectors.any())
+            .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                // 大标题
-                .title("微信网页开发，接入微信JS-SDK")
-                // 详细描述
-                .description("EHR Platform's REST API, all the applications could access the Object model data via JSON.")
-                // 版本
-                .version("1.0")
-                .termsOfServiceUrl("http://kyyee.com")
-                // 作者
-                .contact(new Contact("kyyee", "http://blog.csdn.net/kyyee", "kyyeeyoung@163.com"))
-                .license("The Apache License, Version 2.0")
-                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-                .build();
+            // 大标题
+            .title("微信网页开发，接入微信JS-SDK")
+            // 详细描述
+            .description("EHR Platform's REST API, all the applications could access the Object model data via JSON.")
+            // 版本
+            .version("1.0")
+            .termsOfServiceUrl("http://kyyee.com")
+            // 作者
+            .contact(new Contact("kyyee", "http://blog.csdn.net/kyyee", "kyyeeyoung@163.com"))
+            .license("The Apache License, Version 2.0")
+            .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
+            .build();
     }
 }

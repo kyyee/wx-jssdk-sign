@@ -10,7 +10,7 @@ cp $current_path/target/app.jar $current_path/docker/
 
 cd $current_path/docker/ && chmod +x *.sh
 
-image_name=cg-imss-platform-be
+image_name=wx-jssdk-sign-be
 
 docker build --no-cache=true -t ${image_name}:${detail_version}T${BUILD_TIMESTAMP} .
 docker save -o $WORKSPACE/$tar_name_platform-$detail_version/images/${image_name}-${detail_version}.tar.gz ${image_name}:${detail_version}T${BUILD_TIMESTAMP}
