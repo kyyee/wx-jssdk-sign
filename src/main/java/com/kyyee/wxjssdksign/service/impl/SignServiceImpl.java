@@ -34,15 +34,15 @@ import java.util.UUID;
 @Slf4j
 public class SignServiceImpl implements SignService {
     // 获取access_token的url
-    public static final String QY_ACCESS_TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}";
-    public static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}";
+    private static final String QY_ACCESS_TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}";
+    private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}";
     // 获取ticket的url
-    public static final String QY_TICKET_URL = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=";
-    public static final String TICKET_URL = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi";
+    private static final String QY_TICKET_URL = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=";
+    private static final String TICKET_URL = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi";
     // AccessToken 缓存json文件
-    public static final String ACCESS_TOKEN_CONFIG_JSON = "json/access_token.json";
+    private static final String ACCESS_TOKEN_CONFIG_JSON = "json/access_token.json";
     // Ticket 缓存json文件
-    public static final String TICKET_CONFIG_JSON = "json/ticket.json";
+    private static final String TICKET_CONFIG_JSON = "json/ticket.json";
     ObjectMapper objectMapper = new ObjectMapper();
     @Resource
     private
@@ -51,25 +51,16 @@ public class SignServiceImpl implements SignService {
     private
     WxProperties wxProperties;
 
-    private static String byteToHex(final byte[] hash) {
-        try (Formatter formatter = new Formatter()) {
-            for (byte b : hash) {
-                formatter.format("%02x", b);
-            }
-            return formatter.toString();
-        }
-    }
-
     @Override
     public SignResDto sign(String url) throws NoSuchAlgorithmException, IOException, BaseException {
-        String jsApiTicket = getTicket();
+        String jsapiTicket = getTicket();
         String nonceStr = createNonceStr();
         String timestamp = createTimestamp();
         String rawSignature;
         String signature;
 
         // 注意这里参数名必须全部小写，且参数的顺序要按照 key 值 ASCII 码升序排序
-        rawSignature = MessageFormat.format("jsapi_ticket={0}&noncestr={1}&timestamp={2}&url={3}", jsApiTicket, nonceStr, timestamp, url);
+        rawSignature = MessageFormat.format("jsapi_ticket={0}&noncestr={1}&timestamp={2}&url={3}", jsapiTicket, nonceStr, timestamp, url);
         log.info(rawSignature);
 
         MessageDigest crypt = MessageDigest.getInstance("SHA-1");
@@ -85,6 +76,15 @@ public class SignServiceImpl implements SignService {
             .rawSignature(rawSignature)
             .signature(signature)
             .build();
+    }
+
+    private String byteToHex(final byte[] hash) {
+        try (Formatter formatter = new Formatter()) {
+            for (byte b : hash) {
+                formatter.format("%02x", b);
+            }
+            return formatter.toString();
+        }
     }
 
     private String createNonceStr() {

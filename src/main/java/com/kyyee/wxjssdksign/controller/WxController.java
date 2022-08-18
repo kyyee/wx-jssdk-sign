@@ -22,7 +22,7 @@ import java.security.NoSuchAlgorithmException;
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("/sign")
+@RequestMapping("/api/kyyee/v1/wx/sign")
 @CrossOrigin
 @Slf4j
 public class WxController {

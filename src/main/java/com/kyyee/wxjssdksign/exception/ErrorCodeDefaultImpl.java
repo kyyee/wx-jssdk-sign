@@ -8,7 +8,7 @@ public class ErrorCodeDefaultImpl implements IErrorCode {
     private static final String codePrefix;
 
     static {
-        codePrefix = SpringUtils.getProperty("unisinsight.error-code-prefix");
+        codePrefix = SpringUtils.getProperty("kyyee.error-code-prefix");
     }
 
     private final String code;
